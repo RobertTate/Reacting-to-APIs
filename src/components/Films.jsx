@@ -6,7 +6,8 @@ class Films extends Component {
         super(props);
 
         this.state = {
-            films: []
+            films: [],
+            buttonOn: false
         };
     }
 
@@ -22,13 +23,32 @@ class Films extends Component {
 
 
     render() {
-        return (
+        if (this.state.buttonOn === true) {
+            return (
+                <Fragment>
+                    <img className="card-img-top" src="https://ghibliapi.herokuapp.com/images/logo.svg" alt="Studio Ghibli" />
+                    <button 
+                    type="button" 
+                    className="btn btn-primary btn-lg"
+                    onClick={(event) => { this.setState({ buttonOn: false }) }}
+                    >Films Loaded!</button>
+                    {this.state.films.map((film) =>
+                        <Card key={film.id} film={film} />
+                    )}
+                </Fragment>
+            )
+        } else {
+            return (
             <Fragment>
-                {this.state.films.map((film) =>
-                    <Card key={film.id} film={film} />
-                )}
+                <img className="card-img-top" src="https://ghibliapi.herokuapp.com/images/logo.svg" alt="Studio Ghibli" />
+                <button type="button" 
+                className="btn btn-primary btn-lg"
+                onClick={(event) => { this.setState({ buttonOn: true }) }}
+                >Load Films</button>
             </Fragment>
-        )
+            )
+        }
+
     }
 }
 
