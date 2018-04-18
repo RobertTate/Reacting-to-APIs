@@ -1,22 +1,22 @@
 import React, { Component, Fragment } from 'react';
-import Card from './Card';
+import Peoplecard from './Peoplecard';
 
-class Films extends Component {
+class People extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            films: [],
+            peoples: [],
             buttonOn: false
         };
     }
 
     componentDidMount() {
-        fetch("https://ghibliapi.herokuapp.com/films")
+        fetch("https://ghibliapi.herokuapp.com/people")
             .then((result) => result.json())
-            .then((films) => {
+            .then((peoples) => {
                 this.setState({
-                    films
+                    peoples
                 })
             });
     };
@@ -30,12 +30,12 @@ class Films extends Component {
                         type="button"
                         className="btn btn-primary btn-lg align-items-center"
                         onClick={(event) => { this.setState({ buttonOn: false }) }}
-                    >Films Loaded!</button>
+                    >People Loaded!</button>
                     <div className="container">
                         <div className="row">
                             <div className="col">
-                                {this.state.films.map((film) =>
-                                    <Card key={film.id} film={film} />
+                                {this.state.peoples.map((people) =>
+                                    <Peoplecard key={people.id} people={people} />
                                 )}
                             </div>
                         </div>
@@ -48,7 +48,7 @@ class Films extends Component {
                     <button type="button"
                         className="btn btn-primary btn-lg align-self-center"
                         onClick={(event) => { this.setState({ buttonOn: true }) }}
-                    >Load Films</button>
+                    >Load People</button>
                 </Fragment>
             )
         }
@@ -57,6 +57,4 @@ class Films extends Component {
 }
 
 
-export default Films;
-
-
+export default People;
